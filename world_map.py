@@ -39,6 +39,7 @@ rooms = {
         "description": "🚨 The 4th Precinct is a dim jungle of buzzing fluorescent tubes and desperate characters!\nRain punches hard against the high windows, washing grease tracks down the glass!!\nThe air is heavy with stale tobacco smoke and damp wool coats!",
         "short_desc": "🚨 The grim, rain-streaked bullpen of the 4th Precinct.",
         "exits": {"north": "crime_scene", "south": None, "east": "evidence_room", "west": None},
+        # Engine keys are kept lowercase for simple coding checks
         "items": ["case_file", "badge", "wallet"],
         "characters": ["captain_morrison"],
         "locked": False,
@@ -49,7 +50,7 @@ rooms = {
                 "\"Listen up, rookie! Harlow is dead in his mansion up on the hill!!! 🏰\n"
                 "The high-society doctors are calling it a heart attack, but my gut says they're covering up something ugly!!! 🤬\n\n"
                 "You're the only investigator left in the bullpen tonight, {player_name}.\n"
-                "Grab your BADGE, your WALLET, and that flimsy CASE_FILE off the green cabinet!\n"
+                "Grab your BADGE, your WALLET, and that flimsy CASE FILE off the green cabinet!\n"
                 "Get out there, play nice with the press, and don't make me look stupid!!!!!\" 🫵🔥"
             )
         },
@@ -96,8 +97,8 @@ rooms = {
         "examine": {},
         "actions": {
             "comfort": "You speak softly to Mrs. Chen.\nShe calms down slightly and points toward the grandfather clock!\n'I heard a loud argument up here at 11:30 PM... it sounded exactly like Master Daniel!' 🗣️🕵️‍♂️\n(Path A unlocked!)",
-            "threaten": "You step sharply into her personal space and demand answers! She bursts into hysterical tears!!! 😭\nIn her panic, she knocks over her cleaning tote, dropping a police-grade FINGERPRINT_KIT on the rug before running away!!! 🏃‍♀️💨\n(Path B unlocked!)",
-            "show_watch": "You dangles the broken watch in front of her face!\n'Wait... his watch stopped at 11:47?! ⏱️😱 Holy mother... but I didn't even come upstairs until midnight!!!\nSomeone else must have been in there!!!!!' She drops a FINGERPRINT_KIT in sheer terror and flees!!! 🏃‍♀️💨"
+            "threaten": "You step sharply into her personal space and demand answers! She bursts into hysterical tears!!! 😭\nIn her panic, she knocks over her cleaning tote, dropping a police-grade FINGERPRINT KIT on the rug before running away!!! 🏃‍♀️💨\n(Path B unlocked!)",
+            "show_watch": "You dangle the broken watch in front of her face!\n'Wait... his watch stopped at 11:47?! ⏱️😱 Holy mother... but I didn't even come upstairs until midnight!!!\nSomeone else must have been in there!!!!!' She drops a FINGERPRINT KIT in sheer terror and flees!!! 🏃‍♀️💨"
         }
     },
 
@@ -123,11 +124,10 @@ rooms = {
         },
         "actions": {
             "accuse": "You flat out accuse Daniel of the crime based on the argument! He laughs coldly.\n'A bold claim!! Come back when you have actual science backing up your fairy tales, or my lawyers will take your shield!!!' ⚖️❌",
-            "bluff": "You lie flatly and say a witness saw him leave the mansion at midnight!\nHis hand tightens violently around his whiskey glass until his knuckles turn stark white!!\n'Witnesses lie!! Especially poor ones!!' 🥃😬\n(You stealthily pocket the THREATENING_LETTER from his desk during his momentary panic!)"
+            "bluff": "You lie flatly and say a witness saw him leave the mansion at midnight!\nHis hand tightens violently around his whiskey glass until his knuckles turn stark white!!\n'Witnesses lie!! Especially poor ones!!' 🥃😬\n(You stealthily pocket the THREATENING LETTER from his desk during his momentary panic!)"
         }
     },
 
-    # BRANCH STATE C1: Neutral Bar
     "bar_neutral": {
         "description": "🎷 The Blue Neon Lounge is a dark dive bar where dreams go to die.\nA low-frequency jazz record plays scratchily from a cracked jukebox.\nRay 'The Wire' Malone sits silently in the back corner.",
         "short_desc": "🎷 The smoky, low-lit basement of the Blue Neon Lounge.",
@@ -146,7 +146,6 @@ rooms = {
         }
     },
 
-    # BRANCH STATE C2: Successful Bribe Bar
     "bar_bribed": {
         "description": "🎷 The Blue Neon Lounge looks a bit warmer now that cold cash has changed hands!\nRay leans forward over the table, ready to spill everything.",
         "short_desc": "🎷 The Blue Neon Lounge (Bribed State).",
@@ -162,7 +161,6 @@ rooms = {
         "actions": {}
     },
 
-    # BRANCH STATE C3: Failed Hostile Bar
     "bar_hostile": {
         "description": "🎷 The jukebox needle is broken! Patrons are actively glaring at you.\nRay completely refuses to look at you, staring straight ahead.",
         "short_desc": "🎷 The Blue Neon Lounge (Hostile State).",
@@ -190,7 +188,7 @@ rooms = {
         "examine": {
             "poison_vial": "🧪 Hidden deep inside the toe of an exotic alligator boot in the closet is a tiny glass bottle!!!\nThe label has been roughly peeled away, but a crystalized film of clear liquid remains stuck to the dropper!!! ☠️",
             "desk": "🖤 A sleek, black lacquer writing desk sits against the wall, entirely clear of papers.\nThe surface looks completely immaculate...",
-            "hidden_ledger": "📂 *CLICK!!!*\nUsing the fingerprint_kit on the desk reveals a hidden latch!!! A secret drawer pops open, revealing a black ledger book!\nIts pages detail systematic kickbacks routed directly to a private account owned by CAPTAIN MORRISON!!!!! 🚨😱"
+            "hidden_ledger": "📂 *CLICK!!!*\nUsing the FINGERPRINT KIT on the desk reveals a hidden latch!!! A secret drawer pops open, revealing a black ledger book!\nIts pages detail systematic kickbacks routed directly to a private account owned by CAPTAIN MORRISON!!!!! 🚨😱"
         },
         "actions": {}
     },
@@ -246,14 +244,14 @@ rooms = {
 endings = {
     "true_ending": {
         "title": "THE COMPASS OF JUSTICE 🧭✨",
-        "text": "You draw the poison_report and the threatening_letter from your wet trench coat!\nDaniel's calm demeanor instantly cracks; his face drains of color, and his cigarette drops into a puddle with a faint hiss!!\nHe stammers, trying to weave another desperate lie, but the paperwork is completely ironclad!!!\n\nYou snap the heavy steel handcuffs tightly over his wrists, securing your first solo homicide conviction!!!\nThe city below is still a corrupt, rain-soaked concrete jungle, but tonight, you proved that some monsters don't get away with it!!!!"
+        "text": "You draw the POISON REPORT and the THREATENING LETTER from your wet trench coat!\nDaniel's calm demeanor instantly cracks; his face drains of color, and his cigarette drops into a puddle with a faint hiss!!\nHe stammers, trying to weave another desperate lie, but the paperwork is completely ironclad!!!\n\nYou snap the heavy steel handcuffs tightly over his wrists, securing your first solo homicide conviction!!!\nThe city below is still a corrupt, rain-soaked concrete jungle, but tonight, you proved that some monsters don't get away with it!!!!"
     },
     "bad_ending": {
         "title": "A COLD NIGHT IN THE GUTTER 🌧️🥃",
-        "text": "You attempt to accuse Daniel based on mere suspicion, or perhaps you pointed your finger at the frantic housekeeper back at the manor!\nWithout the certified poison_report, Daniel's high-priced corporate attorneys reduce your amateur theories to absolute dust within seconds!!!!!\n\nThe police department issues an immediate, sweeping public apology to the Harlow estate, and the case is permanently closed as a natural heart attack!!\nYou are stripped of your gun and badge for gross incompetence, leaving you to spend your remaining years drinking cheap whiskey at Ray's bar, staring miserably into the bottom of a glass!"
+        "text": "You attempt to accuse Daniel based on mere suspicion, or perhaps you pointed your finger at the frantic housekeeper back at the manor!\nWithout the certified POISON REPORT, Daniel's high-priced corporate attorneys reduce your amateur theories to absolute dust within seconds!!!!!\n\nThe police department issues an immediate, sweeping public apology to the Harlow estate, and the case is permanently closed as a natural heart attack!!\nYou are stripped of your gun and badge for gross incompetence, leaving you to spend your remaining years drinking cheap whiskey at Ray's bar, staring miserably into the bottom of a glass!"
     },
     "secret_ending": {
         "title": "A DEEPER SHADE OF NOIR 🚨💀",
-        "text": "You bypass the penthouse terrace entirely! Instead, you slip through the rainy night back to the police_station, silently entering the Captain's office and slamming the hidden_ledger heavily onto his desk!!!\n\nMorrison stares at the open pages detailing his years of bribery, his cigar smoke curling lazily around his face. He doesn't panic at all!!\nInstead, he slowly smiles, sliding his right hand beneath his jacket toward his shoulder holster!!!\n\nYou realize with sickening clarity why this impossible, locked-room murder case was handed to an inexperienced investigator like you!!!\nThe rain beats heavily against the glass, ready to wash away yet another inconvenient truth!!!!"
+        "text": "You bypass the penthouse terrace entirely! Instead, you slip through the rainy night back to the police_station, silently entering the Captain's office and slamming the HIDDEN LEDGER heavily onto his desk!!!\n\nMorrison stares at the open pages detailing his years of bribery, his cigar smoke curling lazily around his face. He doesn't panic at all!!\nInstead, he slowly smiles, sliding his right hand beneath his jacket toward his shoulder holster!!!\n\nYou realize with sickening clarity why this impossible, locked-room murder case was handed to an inexperienced investigator like you!!!\nThe rain beats heavily against the glass, ready to wash away yet another inconvenient truth!!!!"
     }
 }
