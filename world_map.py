@@ -1,3 +1,5 @@
+# 🕵️‍♂️ Midnight in the Neon Rain: A Text-Adventure Mystery
+
 # ==========================================
 # 1. THE CHARACTERS DICTIONARY
 # ==========================================
