@@ -170,7 +170,7 @@ rooms = {
             }
         },
         "examine": {
-            "wastebasket": "🗑️ Inside the metal bin, hidden beneath a layer of discarded reports,\nis a crumpled piece of heavy, expensive parchment paper!!!\n(Type 'take threatening_letter' to retrieve it)",
+            "wastebasket": "🗑️ Inside the metal bin, hidden beneath a layer of discarded reports,\nis a crumpled piece of heavy, expensive parchment paper!!!",
             "threatening_letter": "✉️ A typed letter on custom stationery:\n'Pay out my share or the city finds out what you did!!! I won't let you ruin me, Victor!!!!!'\nIt is signed with a bold, aggressive letter 'D'!!! ✒️🔥"
         },
         "dialogue": {
@@ -303,7 +303,7 @@ rooms = {
         "examine": {
             "poison_vial": "🧪 Hidden deep inside the toe of an exotic alligator boot in the closet is a tiny glass bottle!!!\nThe label has been roughly peeled away, but a crystalized film of clear liquid remains stuck to the dropper!!! ☠️",
             "desk": "🖤 A sleek, black lacquer writing desk sits against the wall, entirely clear of papers.\nThe surface looks completely immaculate... (If you have a fingerprint kit, you can run an item interaction checklist check here)",
-            "hidden_ledger": "📂 *CLICK!!!*\nUsing the FINGERPRINT KIT on the desk reveals a hidden latch!!! A secret drawer pops open, revealing a black ledger book!\nIts pages detail systematic kickbacks routed directly to a private account owned by CAPTAIN MORRISON!!!!! 🚨😱\n(Type 'take hidden_ledger' to recover this dark file!)"
+            "hidden_ledger": "📂 *CLICK!!!*\nUsing the FINGERPRINT KIT on the desk reveals a hidden latch!!! A secret drawer pops open, revealing a black ledger book!\nIts pages detail systematic kickbacks routed directly to a private account owned by CAPTAIN MORRISON!!!!! 🚨😱"
         },
         "dialogue": {},
         "actions": {

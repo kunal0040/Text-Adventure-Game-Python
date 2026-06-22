@@ -94,9 +94,9 @@ def printroom_details(room_name):
         visited_rooms.add(room_name)
 
 
-    slow_print("\n" + "=" * line_length, 0.03)
+    slow_print("\n" + "=" * line_length, 0.01)
     slow_print(description, 0.03)
-    slow_print("=" * line_length, 0.03)
+    slow_print("=" * line_length, 0.01)
 
     if room_data.get("items"):
         pretty_items = [item.replace("_", " ").title() for item in room_data["items"]]
@@ -186,6 +186,13 @@ def execute_investigation(action_name):
         action_node = actions[action_name]
         slow_print("\n" + action_node["text"], 0.02)
 
+        is_major_choice = "change_room_state" in action_node or "trigger_flag" in action_node
+
+        if is_major_choice:
+            room_data["actions"] = {}
+        else:
+            del actions[action_name]
+
         flag_to_trigger = action_node.get("trigger_flag")
         if flag_to_trigger:
             game_flags[flag_to_trigger] = True
@@ -234,6 +241,22 @@ def talk_to_character(clean_target):
         return
 
     speaker_name = world_map.characters[matched_char_id]["name"]
+
+    if matched_char_id == "captain_morrison" and "hidden_ledger" in inventory:
+        print(f"\nApproaching {speaker_name} with your hand firml gripped on the evidence...")
+        time.sleep(0.8)
+        slow_print(f"\n{speaker_name} » What's that file you're holding, Rookie? Wait... where did you find that?!", 0.02)
+        time.sleep(1)
+        evaluate_final_endings()
+        return
+    
+    talked_flag = f"talked_{matched_char_id}"
+
+    if game_flags.get(talked_flag):
+        slow_print(f"\n{speaker_name} » Look, Detective, I've already told you everything I know.\nDon't waste your time!!", 0.02)
+        time.sleep(0.5)
+        return
+    
     dialogue_node = room_data["dialogue"][matched_char_id]
     raw_text = dialogue_node["text"]
 
@@ -249,6 +272,8 @@ def talk_to_character(clean_target):
         f"\n{speaker_name} » {spoken_text.format(player_name=player_name).replace('\"', '')}",
         0.02
     )
+
+    game_flags[talked_flag] = True
 
     flag_to_trigger = dialogue_node.get("trigger_flag")
     if flag_to_trigger:
@@ -270,6 +295,13 @@ def move_room(target_location):
             print(f"\nYou are already standing inside the {target_location.replace('_', ' ').title()}")
             return
         
+        dest_exits = world_map.rooms[target_location].get("exits", {})
+        for exit_node in dest_exits.values():
+            req_flags = exit_node.get("required_flags", [])
+            if any(not game_flags.get(f) for f in req_flags):
+                print(f"\n[LOCKED] Sudden shifts in the investigation prevent shortcut transit to {target_location.replace('_', ' ').title()}!")
+                return
+            
         current_room = target_location
         print(f"\nGoing to {current_room.replace('_', ' ').title()}...")
         loading()
@@ -343,7 +375,7 @@ while True:
             f"\nALERT Detective {player_name}! You have returned to the Precinct with the HIDDEN LEDGER.",
             0.01,
         )
-        slow_print("Type: 'talk captain' to confront Morrison with the file!", 0.01)
+        slow_print("Type: 'talk' to confront Morrison.", 0.01)
 
     command = get_command()
     if command is None:
