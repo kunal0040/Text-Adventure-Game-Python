@@ -289,8 +289,8 @@ rooms = {
         "exits": {
             "north": {
                 "destination": "confrontation",
-                "required_flags": ["homicide_confirmed"],
-                "required_items": ["poison_report"],
+                "required_flags": [],
+                "required_items": [],
                 "lock_message": "\nYou have the poison container, but you need to get it analyzed at the evidence room lab before executing an arrest confront."
             },
             "south": {
@@ -377,14 +377,19 @@ rooms = {
 endings = {
     "true_ending": {
         "title": "THE COMPASS OF JUSTICE 🧭✨",
-        "text": "You draw the POISON REPORT and the THREATENING LETTER from your wet trench coat!\nDaniel's calm demeanor instantly cracks; his face drains of color, and his cigarette drops into a puddle with a faint hiss!!\nHe stammers, trying to weave another desperate lie, but the paperwork is completely ironclad!!!\n\nYou snap the heavy steel handcuffs tightly over his wrists, securing your first solo homicide conviction!!!\nThe city below is still a corrupt, rain-soaked concrete jungle, but tonight, you proved that some monsters don't get away with it!!!!"
+        "text": "You draw the POISON REPORT and the THREATENING LETTER from your wet trench coat!\nDaniel's calm demeanor instantly cracks; his face drains of color, and his cigarette drops into a puddle with a faint hiss!!\nHe stammers, trying to weave another desperate lie, but the paperwork is completely ironclad!!!\n\nYou snap the heavy steel handcuffs tightly over his wrists, securing your first solo homicide conviction!!!\nThe city below is still a corrupt, rain-soaked concrete jungle, but tonight, you proved that some monsters don't get away with it!!!!",
+        "character_confront": None,
+        "item_needed": ("poison_report", "threatening_letter")
+    },
+    "secret_ending": {
+        "title": "A DEEPER SHADE OF NOIR 🚨💀",
+        "text": "You bypass the penthouse terrace entirely! Instead, you slip through the rainy night back to the police_station, silently entering the Captain's office and slamming the HIDDEN LEDGER heavily onto his desk!!!\n\nMorrison stares at the open pages detailing his years of bribery, his cigar smoke curling lazily around his face. He doesn't panic at all!!\nInstead, he slowly smiles, sliding his right hand beneath his jacket toward his shoulder holster!!!\n\nYou realize with sickening clarity why this impossible, locked-room murder case was handed to an inexperienced investigator like you!!!\nThe rain beats heavily against the glass, ready to wash away yet another inconvenient truth!!!!",
+        "character_confront": "captain_morrison",
+        "item_needed": "hidden_ledger",
+        "room_needed": "police_station"
     },
     "bad_ending": {
         "title": "A COLD NIGHT IN THE GUTTER 🌧️🥃",
         "text": "You attempt to accuse Daniel based on mere suspicion, or perhaps you pointed your finger at the frantic housekeeper back at the manor!\nWithout the certified POISON REPORT, Daniel's high-priced corporate attorneys reduce your amateur theories to absolute dust within seconds!!!!!\n\nThe police department issues an immediate, sweeping public apology to the Harlow estate, and the case is permanently closed as a natural heart attack!!\nYou are stripped of your gun and badge for gross incompetence, leaving you to spend your remaining years drinking cheap whiskey at Ray's bar, staring miserably into the bottom of a glass!"
-    },
-    "secret_ending": {
-        "title": "A DEEPER SHADE OF NOIR 🚨💀",
-        "text": "You bypass the penthouse terrace entirely! Instead, you slip through the rainy night back to the police_station, silently entering the Captain's office and slamming the HIDDEN LEDGER heavily onto his desk!!!\n\nMorrison stares at the open pages detailing his years of bribery, his cigar smoke curling lazily around his face. He doesn't panic at all!!\nInstead, he slowly smiles, sliding his right hand beneath his jacket toward his shoulder holster!!!\n\nYou realize with sickening clarity why this impossible, locked-room murder case was handed to an inexperienced investigator like you!!!\nThe rain beats heavily against the glass, ready to wash away yet another inconvenient truth!!!!"
     }
 }

@@ -2,6 +2,7 @@ import time
 import sys
 import world_map
 
+
 def loading():
     for i in range(3):
         time.sleep(0.3)
@@ -93,7 +94,6 @@ def printroom_details(room_name):
         description = room_data["description"]
         visited_rooms.add(room_name)
 
-
     slow_print("\n" + "=" * line_length, 0.01)
     slow_print(description, 0.03)
     slow_print("=" * line_length, 0.01)
@@ -115,7 +115,9 @@ def printroom_details(room_name):
 
     if room_data.get("exits"):
         pretty_exits = [direction.upper() for direction in room_data["exits"].keys()]
-        slow_print(f"\n🧭 Available directions to move: {', '.join(pretty_exits)}", 0.02)
+        slow_print(
+            f"\n🧭 Available directions to move: {', '.join(pretty_exits)}", 0.02
+        )
 
 
 def inspect_item(item_name):
@@ -186,7 +188,9 @@ def execute_investigation(action_name):
         action_node = actions[action_name]
         slow_print("\n" + action_node["text"], 0.02)
 
-        is_major_choice = "change_room_state" in action_node or "trigger_flag" in action_node
+        is_major_choice = (
+            "change_room_state" in action_node or "trigger_flag" in action_node
+        )
 
         if is_major_choice:
             room_data["actions"] = {}
@@ -241,22 +245,34 @@ def talk_to_character(clean_target):
         return
 
     speaker_name = world_map.characters[matched_char_id]["name"]
+    end_detection = world_map.endings["secret_ending"]
 
-    if matched_char_id == "captain_morrison" and "hidden_ledger" in inventory:
-        print(f"\nApproaching {speaker_name} with your hand firml gripped on the evidence...")
+    if (
+        matched_char_id == end_detection["character_confront"]
+        and end_detection["item_needed"] in inventory
+    ):
+        print(
+            f"\nApproaching {speaker_name} with your hand firmly gripping the evidence..."
+        )
         time.sleep(0.8)
-        slow_print(f"\n{speaker_name} » What's that file you're holding, Rookie? Wait... where did you find that?!", 0.02)
+        slow_print(
+            f"\n{speaker_name} » What's that file you're holding, Rookie? Wait... where did you find that?!",
+            0.02,
+        )
         time.sleep(1)
         evaluate_final_endings()
         return
-    
+
     talked_flag = f"talked_{matched_char_id}"
 
     if game_flags.get(talked_flag):
-        slow_print(f"\n{speaker_name} » Look, Detective, I've already told you everything I know.\nDon't waste your time!!", 0.02)
+        slow_print(
+            f"\n{speaker_name} » Look, Detective, I've already told you everything I know.\nDon't waste your time!!",
+            0.02,
+        )
         time.sleep(0.5)
         return
-    
+
     dialogue_node = room_data["dialogue"][matched_char_id]
     raw_text = dialogue_node["text"]
 
@@ -270,7 +286,7 @@ def talk_to_character(clean_target):
 
     slow_print(
         f"\n{speaker_name} » {spoken_text.format(player_name=player_name).replace('\"', '')}",
-        0.02
+        0.02,
     )
 
     game_flags[talked_flag] = True
@@ -280,7 +296,8 @@ def talk_to_character(clean_target):
         game_flags[flag_to_trigger] = True
 
     if game_flags.get("ready_for_judgment") or (
-        current_room == "police_station" and "hidden_ledger" in inventory
+        current_room == end_detection["room_needed"]
+        and end_detection["item_needed"] in inventory
     ):
         evaluate_final_endings()
 
@@ -292,16 +309,20 @@ def move_room(target_location):
 
     if target_location in visited_rooms:
         if target_location == current_room:
-            print(f"\nYou are already standing inside the {target_location.replace('_', ' ').title()}")
+            print(
+                f"\nYou are already standing inside the {target_location.replace('_', ' ').title()}"
+            )
             return
-        
+
         dest_exits = world_map.rooms[target_location].get("exits", {})
         for exit_node in dest_exits.values():
             req_flags = exit_node.get("required_flags", [])
             if any(not game_flags.get(f) for f in req_flags):
-                print(f"\n[LOCKED] Sudden shifts in the investigation prevent shortcut transit to {target_location.replace('_', ' ').title()}!")
+                print(
+                    f"\n[LOCKED] Sudden shifts in the investigation prevent shortcut transit to {target_location.replace('_', ' ').title()}!"
+                )
                 return
-            
+
         current_room = target_location
         print(f"\nGoing to {current_room.replace('_', ' ').title()}...")
         loading()
@@ -337,12 +358,13 @@ def move_room(target_location):
 
 def evaluate_final_endings():
 
-    if current_room == "police_station" and "hidden_ledger" in inventory:
-        end_node = world_map.endings["secret_ending"]
+    secret = world_map.endings["secret_ending"]
+    true = world_map.endings["true_ending"]
 
-    elif "poison_report" in inventory and "threatening_letter" in inventory:
-        end_node = world_map.endings["true_ending"]
-
+    if current_room == secret["room_needed"] and secret["item_needed"] in inventory:
+        end_node = secret
+    elif all(item in inventory for item in true["item_needed"]):
+        end_node = true
     else:
         end_node = world_map.endings["bad_ending"]
 
@@ -370,7 +392,11 @@ printroom_details(current_room)
 
 while True:
 
-    if current_room == "police_station" and "hidden_ledger" in inventory:
+    secret_ending = world_map.endings["secret_ending"]
+    if (
+        current_room == secret_ending["room_needed"]
+        and secret_ending["item_needed"] in inventory
+    ):
         slow_print(
             f"\nALERT Detective {player_name}! You have returned to the Precinct with the HIDDEN LEDGER.",
             0.01,

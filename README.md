@@ -21,8 +21,8 @@ You have until dawn to explore the manor, hit the pavement, gather evidence, and
 
 * **Data-Driven Architecture:** Built using a completely modular structural dictionary system (`world_map.py`), cleanly decoupling story nodes from the main game engine (`main.py`) for seamless, endless scalability.
 * **Atmospheric Pacing Engine:** Powered by custom text animation loops (`slow_print` and `loading`) that mimic retro detective computer terminals, preventing text dumping and drawing you deeper into the noir narrative.
-* **Hybrid Fast Travel System:** Tracks your exploration footprint automatically using a Python cache set (`visited_rooms`). Once you discover a room, you can bypass repetitive cardinal directions and instantly warp back by typing `go [room_name]`.
-* **Look-Ahead Lock Protection:** A smart validation layer built directly into the fast travel mechanic. Before teleporting you across town, the engine scans the destination's rules—if story configurations or item locks have changed, it blocks the shortcut to preserve the game's logical puzzle boundaries.
+* **Hybrid Fast Travel System:** Tracks explored rooms in the `visited_rooms` set. After visiting a room, you can return directly by typing `go [room_name]`.
+* **Fast Travel Behavior:** Shortcuts check required story flags on the destination room's exits, but currently do not check required items. This means fast travel can bypass item-gated exits. Traveling by direction checks both flags and items.
 * **Modular Multi-State Progression:** Special room action hooks completely morph environmental scenes, spawning hidden elements on the fly or shifting characters from cooperative to hostile based entirely on your approach.
 
 ---
@@ -35,8 +35,8 @@ The parser engine dynamically filters your typed inputs into executable core ver
 | :--- | :--- | :--- | :--- |
 | **Move & Navigation** | `go [direction]` | `go north` | Walk between adjacent areas manually. |
 | **Instant Shortcut Warp** | `go [room_name]` | `go police_station` | Fast travel directly to any area you have previously uncovered. |
-| **Interrogation** | `talk [suspect/witness]` | `talk butler` | Grill entities. Character matching handles loose names seamlessly. |
-| **Evidence Gathering** | `take [item]` | `take vial` | Secure a clue from the floor and add it to your case file. |
+| **Interrogation** | `talk [suspect/witness]` | `talk mrs_chen` | Grill people in the current room. Character matching accepts partial names. |
+| **Evidence Gathering** | `take [item]` | `take poison_vial` | Secure an item from the current room and add it to your inventory. |
 | **Forensic Inspection** | `inspect [item]` / `look [object]` | `inspect desk` | Deeply examine clues in your inventory, or static objects in the room. |
 | **Open Case File** | `inventory` / `inv` | `inventory` | Pull open your trench coat pockets and inspect your gathered evidence array. |
 | **Field Guide & Exit** | `help` / `quit` | `help` | Open the full field guide framework inside the console, or resign from the force. |
@@ -47,6 +47,6 @@ The parser engine dynamically filters your typed inputs into executable core ver
 
 Your thoroughness as an investigator determines your ultimate fate at the climax. Can you find all three paths?
 
-* **🏆 The True Ending:** Connect the dots, secure the definitive forensic proof, and force a brilliant killer's final confession.
-* **🌧️ The Bad Ending:** Fail to collect ironclad proof and confront the killer with empty pockets, allowing corporate defense teams to tear your case to pieces.
-* **🚨 The Secret Path:** Unearth a hidden thread of systemic betrayal that shifts the entire focus of the case and takes you directly to the top.
+* **🏆 The True Ending:** Collect both the poison report and threatening letter, then confront Daniel. You arrest him and solve the homicide.
+* **🌧️ The Bad Ending:** Confront Daniel without both pieces of evidence. The case fails and is closed as a natural death.
+* **🚨 The Secret Path:** Use the `use_kit` action in Daniel's apartment to uncover the hidden ledger. Return to the police station and confront Captain Morrison while carrying it.
